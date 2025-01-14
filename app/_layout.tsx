@@ -10,21 +10,21 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
     const [loaded, error] = useFonts({
-        FiraSans: require('../assets/fonts/FiraSans-Regular.ttf'),
-        FiraSansSemiBold: require('../assets/fonts/FiraSans-SemiBold.ttf')
+        'FiraSans': require('../assets/fonts/FiraSans-Regular.ttf'),
+        'FiraSansSemiBold': require('../assets/fonts/FiraSans-SemiBold.ttf')
     });
-
-    useEffect(() => {
-        if (loaded) {
-            SplashScreen.hideAsync();
-        }
-    }, [loaded]);
 
     useEffect(() => {
         if(error) {
             throw error;
         }
     }, [error]);
+    
+    useEffect(() => {
+        if (loaded) {
+            SplashScreen.hideAsync();
+        }
+    }, [loaded]);
 
     if (!loaded) {
         return null;
@@ -38,13 +38,13 @@ export default function RootLayout() {
                 statusBarBackgroundColor: Colors.black,
                 contentStyle: {
                     backgroundColor: Colors.black
-                }
+                },
+                headerShown: false
             }}
         >
             <Stack.Screen name="login" />
             <Stack.Screen name="restore"
                 options={{
-                    title: 'Восстановить пароль',
                     presentation: 'modal'
                 }} />
         </Stack>
